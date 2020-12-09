@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pixel2Pixel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-CuOF+2SnTUfTwSZjCXf01h7uYhfOBuxIhGKPbfEJ3+FqH/s6cIFN9bGr1HmAg4fQ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-image: url("{% static 'project1/BG.png'%}")
+        }
+
+        * {
+            outline: none;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .dim {
+            background-image: url("{% static 'project1/inputbg.png' %}");
+            background-repeat: no-repeat;
+            border: none;
+            background-color: rgba(255, 255, 255, 0);
+            width: 132px;
+            height: 55px;
+            padding: 0px 20px;
+            font-weight: bold;
+            font-size: 18px;
+            padding-bottom: 4px;
+        }
+
+        input::-webkit-inner-spin-button,
+        input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+
+        #container {
+            margin-left: 10px;
+            margin-top: 20px;
+            max-width: 1060px;
+        }
+
+        #card {
+            background-color: white;
+            padding: 20px 10px 20px 20px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px lightgrey;
+        }
+
+        #file::before {
+
+            width: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            content: 'Add File';
+            padding: 0px 20px;
+            display: inline-block;
+        }
+
+        #file::-webkit-file-upload-button {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <img src="{% static 'project1/Logo.png' %}" style="width: 20%; height: 100%;margin:20px;" alt="no image">
+    <form method="POST" action="download/" enctype="multipart/form-data">
+        <div id="container" class="container-sm">
+            <div class="container-sm row" id="card">
+                <h4 style="margin-bottom:40px">Convert your files here :</h4>
+                {%csrf_token %}
+                <div class="col-sm">
+                    <input name="image" id="file" type="file" class="btn btn-success"
+                        style="content:'Add File';color:white;background-color: #1A4B27;border:none;padding:5px 10px;border-radius:10px" />
+                    <!-- <span><img style="width: 20px;height: 20px;margin:-2px 10px 0px 0px;"
+                                src="{% static 'project1/Fileicon.png' %}" alt=""></span>ADD FILE</button> -->
+                </div>
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <input name="w" value="300" class="dim" maxlength="4" type="number"> X <input name="h" value="300" class="dim" maxlength="4" type="number" />
+                        <button type="submit" class="btn btn-success"
+                            style="margin-left:0px;color:white;background-color: #1A4B27;border:none;padding:10px 20px;border-radius:10px">
+                            <span><img style="width: 30px;height: 30px;margin:-2px 10px 0px 0px;"
+                                    src="{% static 'project1/convert.png' %}" alt=""></span>CONVERT</button>
+                                    {%block content%}
+                                    
+                                    {% endblock%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
